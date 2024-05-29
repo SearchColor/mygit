@@ -22,9 +22,9 @@ const connection = mysql.createConnection({
   const month = curtime.getMonth()+1;
   const hours = curtime.getHours();
   const min = curtime.getMinutes();
-  const millisec = curtime.getMilliseconds();
+  const sec = curtime.getSeconds();
   var yy = year+"-"+month+"-"+date;
-  var yyy = year+"-"+month+"-"+date+" "+hours+":"+min+":"+millisec;
+  var yyy = year+"-"+month+"-"+date+" "+hours+":"+min+":"+sec;
   
   
   const dd =  Date();
