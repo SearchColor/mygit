@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1.0">
+    <title>test yb</title>
+</head>
+<body>
+    <h2>get</h2>
+    m_idx : <input type="text" id ="idx">
+    <button onclick="getName()">select for name</button><br><br>
+    unhex_phone  : <input type="text" id ="response22" readonly><br><br>
+    
+    <!-- 
+    useridx : <input type="text" id ="useridx">
+    <button onclick="getIdcount()">select for useridx</button><br><br>
+    name : <input type="text" id ="response33" readonly><br><br>
+
+    id : <input type="text" id ="id_check"><br><br>
+    password : <input type="text" id ="password_check">
+    <button onclick="logincheck()">login check </button><br><br>
+    result : <input type="text" id ="result_check"><br><br> 
+    -->
+    <hr>
+    <h2>post</h2>
+    NickName : <input type="text" id ="NickName"><br><br>
+    id : <input type="text" id ="id"><br><br>
+    phone : <input type="text" id ="phone"><br><br>
+    <button onclick="inmember()">post </button>
+    <button onclick="ssese()">세션 확인 </button><br><br>
+    
+    <hr>
+    <h2>put</h2>
+    ch_idx : <input type="text" id ="ch_idx"><br><br>
+    email : <input type="text" id ="email"><br><br>
+    <button onclick="ch_member()">put</button><br><br>
+    <button onclick="ch_memberNick()">N_put</button><br><br>
+    <button onclick="ch_memberEmail()">E_put</button><br><br>
+    
+    <hr>
+    <h2>delete</h2>
+    del_idx : <input type="text" id ="del_idx">
+    <button onclick="del_member()">delete</button><br><br>
+    
+
+</body>
+<script>
+    function del_member(){
+                var del_idx = document.getElementById('del_idx').value;
+                var ch_id = document.getElementById('ch_id').value;
+                var fcode = "O-M-444";
+                fetch("https://modu.mhgkorea.com:22443/users/member", {
+                method: "DELETE",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Fcode: `${fcode}`, m_idx: `${del_idx}` }),
+                })
+                .then((response) => response.json())
+                .then((result) => console.log(result));
+        }
+
+    function ch_member(){
+                var ch_idx = document.getElementById('ch_idx').value;
+
+                var fcode = "O-M-444";
+                fetch("https://modu.mhgkorea.com:22443/users/member", {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Fcode: `${fcode}`, m_idx: `${ch_idx}`}),
+                })
+                .then((response) => response.json())
+                .then((result) => console.log(result));
+        }
+
+        function ch_memberNick(){
+                var ch_idx = document.getElementById('ch_idx').value;
+                var NickName = document.getElementById('NickName').value;
+
+                var fcode = "O-M-005";
+                fetch("https://modu.mhgkorea.com:22443/users/member", {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Fcode: `${fcode}`, m_idx: `${ch_idx}` , NickName: `${NickName}` }),
+                })
+                .then((response) => response.json())
+                .then((result) => console.log(result));
+        }
+
+        function ch_memberEmail(){
+                var ch_idx = document.getElementById('ch_idx').value;
+                var email = document.getElementById('email').value;
+
+                var fcode = "O-M-006";
+                fetch("https://modu.mhgkorea.com:22443/users/member", {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Fcode: `${fcode}`, m_idx: `${ch_idx}` , email: `${email}` }),
+                })
+                .then((response) => response.json())
+                .then((result) => console.log(result));
+        }
+
+    function inmember(){
+            var NickName = document.getElementById('NickName').value;
+            var id = document.getElementById('id').value;
+            var phone = document.getElementById('phone').value;
+            var fcode = "O-M-001";
+            fetch("https://modu.mhgkorea.com:22443/users/member", {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ Fcode: `${fcode}`, NickName: `${NickName}` , id: `${id}` , phone:`${phone}` }),
+            })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result)
+                document.getElementById('response22').value=result.m_idx;
+                sessionStorage.setItem( "useridx", result.m_idx );
+
+            }
+            );
+    }
+    function ssese(){
+        var useridx = sessionStorage.getItem('useridx');
+
+        alert(useridx);
+
+        
+    }
+
+    function getName(){ //user 의 name 으로 data 가져오기
+        const m_idx = document.getElementById('idx').value
+        var fcode = "O-M-003";
+        fetch(`https://modu.mhgkorea.com:22443/users/member?Fcode=${fcode}&m_idx=${m_idx}`)
+        .then((response) =>  response.json())
+        .then((data)=>{
+        console.log(data) //받은 data
+        if(data.Rows){
+            if(!data.Rows.length == 0){
+            document.getElementById('response22').value=data.Rows[0].unhex_phone;
+            }
+        }
+        
+        
+    }); 
+    }
+
+    function getIdcount(){ // user 의 idx 로 data 가져오기
+        const useridx = document.getElementById('useridx').value
+        fetch(`https://dev.allmyshop.co.kr:12443/users/useridx/${useridx}`)
+        .then((response) =>  response.json())
+        .then((data)=>{
+        console.log(data)
+        console.log(data.rows.length)
+        document.getElementById('response33').value=data.rows[0].name;
+    });
+    }
+
+    function logincheck(){
+        const id = document.getElementById('id_check').value
+        const password = document.getElementById('password_check').value
+        fetch(`https://dev.allmyshop.co.kr:12443/users/id/${id}/password/${password}`)
+        .then((response) =>  response.json())
+        .then((data)=>{
+            
+        console.log(data)
+        console.log(data.rows.length)
+        document.getElementById('result_check').value=data.rows;
+    });
+    }
+
+</script>
+</html>

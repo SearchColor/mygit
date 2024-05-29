@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shop test</title>
+</head>
+<body>
+    <h2>shops get</h2>
+    <button onclick="getShops()">select shops</button><br><br>
+    <button onclick="getShopsmenu()">select shopsmenu</button><br><br>
+    m_idx : <input type="text" id="m_idx"><br><br>
+    scode : <input type="text" id="scode"><br><br>
+    <button onclick="favoriteShop()">put </button><br><br>
+</body>
+<script>
+    function getShops(){ //user 의 name 으로 data 가져오기
+        var fcode = "O-S-001";
+        fetch(`https://modu.mhgkorea.com:22443/shops?Fcode=${fcode}`)
+        .then((response) =>  response.json())
+        .then((data)=>{
+        console.log(data) //받은 data
+    }); 
+    }
+
+    function getShopsmenu(){ //user 의 name 으로 data 가져오기
+        var fcode = "O-S-002";
+        fetch(`https://modu.mhgkorea.com:22443/shops?Fcode=${fcode}`)
+        .then((response) =>  response.json())
+        .then((data)=>{
+        console.log(data) //받은 data
+    }); 
+    }
+
+    function favoriteShop(){
+                var m_idx = document.getElementById('m_idx').value;
+                var scode = document.getElementById('scode').value;
+
+                var fcode = "O-S-007";
+                fetch("https://modu.mhgkorea.com:22443/shops", {
+                method: "PUT",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ Fcode: `${fcode}`, m_idx: `${m_idx}` , scode: `${scode}` }),
+                })
+                .then((response) => response.json())
+                .then((result) => console.log(result));
+        }
+</script>
+</html>

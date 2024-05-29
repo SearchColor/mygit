@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "fs-extra": "^11.2.0",
+    "mysql": "^2.18.1",
+    "request-ip": "^3.3.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "name": "yb",
+  "version": "1.0.0",
+  "main": "ybtest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ybtest.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
