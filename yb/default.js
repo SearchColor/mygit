@@ -23,6 +23,7 @@ const connection = mysql.createConnection({
   const hours = curtime.getHours();
   const min = curtime.getMinutes();
   const sec = curtime.getSeconds();
+  
   var yy = year+"-"+month+"-"+date;
   var yyy = year+"-"+month+"-"+date+" "+hours+":"+min+":"+sec;
   
