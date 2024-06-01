@@ -2,6 +2,7 @@
 session_start();
 include "dbconn.php";
 @$id = $_REQUEST['id'];
+$id = str_replace(" ", "", $id);
 @$password = $_REQUEST['password'];
 @$state = $_REQUEST['state'];
 
