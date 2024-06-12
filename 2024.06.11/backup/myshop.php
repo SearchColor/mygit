@@ -162,36 +162,26 @@ loadwebview(url,idx,mname,useridx);
 <body>
 	<!-- 팝업 -->
 
-	<div class="popup-overlay" id="popup" style="display: none;">
+	<!-- <div class="popup-overlay" id="popup" style="display: none;">
 
-		<div class="popup-content">
-		<span class="close-btn" onclick="closePopup()">X</span>
-			<?php if (!empty($adimgae)){?>
-				<img src="<?= htmlspecialchars($adimgae) ?>" alt="Ad" style="max-width: 100%; height: auto;">
-				<?
-			}else{
-				?>
-				<h2>"올타고"두유제조기 구매취소처리안내</h2>
-				<p>올타고 스마트 두유 제조기를<br> 
-				구매해주신분들께 안내말씀 드립니다.</p>
-
-				현재 안전인증검사 결과를 대기중입니다.<br>
-				결과통보일자가 미정인 관계로 6월11일부터<br>
-				일괄취소를 진행해드리고자 합니다.<br>
-
-				<p style="color : red;">계좌이체 구매자분들께서는 반드시<br> 
-				환불계좌 등록을 해주셔야 환불처리가 가능합니다.<br>
-				(마이페이지 -> 무통장 환불계좌정보)</P>
-				<p>카드결제 구매자분들께서는 <br>
-				일괄취소처리 바로 가능합니다.</P>
-				<?
-			}
-				?>
-			<div>
-				<input type="checkbox" id="dontShowAgain" onclick="closeset()"> 오늘 하루 보지 않기
-			</div>
-		</div>	
+<div class="popup-content">
+<span class="close-btn" onclick="closePopup()">X</span>
+	<?php if (!empty($adimgae)){?>
+		<img src="<?= htmlspecialchars($adimgae) ?>" alt="Ad" style="max-width: 100%; height: auto;">
+		<?
+	}else{
+		?>
+		<h2>안내 사항</h2>
+		<p>올마이샵의</p><p>할인가 변경 및</p>
+		 <p>일부 상품의 판매가 조정으로인하여</p><p>잠시 결제가 되지않습니다.</P>
+		<?
+	}
+		?>
+	<div>
+		<input type="checkbox" id="dontShowAgain" onclick="closeset()"> 오늘 하루 보지 않기
 	</div>
+</div>
+</div> -->
 
 
 
@@ -872,47 +862,47 @@ while($mrow = mysqli_fetch_assoc($mresult))
 			});
 		});
 
-		document.addEventListener("DOMContentLoaded", function() {
-    checkPopupVisibility();
-});
-function closePopup() {
-    var popup = document.getElementById('popup');
-    popup.style.display = 'none';
-}
-function closeset(){
-	var dontShowAgain = document.getElementById('dontShowAgain').checked;
-	if (dontShowAgain) {
-    setCookie("duyu_anno", "false", 1);
-	closePopup();
-    }
-}
-function checkPopupVisibility() {
-    var announcement = getCookie("duyu_anno");
-    if (announcement !== "false") {
-        document.getElementById('popup').style.display = 'flex';
-    }
-}
+// 		document.addEventListener("DOMContentLoaded", function() {
+//     checkPopupVisibility();
+// });
+// function closePopup() {
+//     var popup = document.getElementById('popup');
+//     popup.style.display = 'none';
+// }
+// function closeset(){
+// 	var dontShowAgain = document.getElementById('dontShowAgain').checked;
+// 	if (dontShowAgain) {
+//     setCookie("announcement", "false", 1);
+// 	closePopup();
+//     }
+// }
+// function checkPopupVisibility() {
+//     var announcement = getCookie("announcement");
+//     if (announcement !== "false") {
+//         document.getElementById('popup').style.display = 'flex';
+//     }
+// }
 
-function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
+// function setCookie(name, value, days) {
+//     var expires = "";
+//     if (days) {
+//         var date = new Date();
+//         date.setTime(date.getTime() + (days*24*60*60*1000));
+//         expires = "; expires=" + date.toUTCString();
+//     }
+//     document.cookie = name + "=" + (value || "") + expires + "; path=/";
+// }
 
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
+// function getCookie(name) {
+//     var nameEQ = name + "=";
+//     var ca = document.cookie.split(';');
+//     for(var i=0;i < ca.length;i++) {
+//         var c = ca[i];
+//         while (c.charAt(0)==' ') c = c.substring(1,c.length);
+//         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+//     }
+//     return null;
+// }
 
 
 
